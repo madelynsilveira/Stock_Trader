@@ -10,7 +10,10 @@ import os, pathlib
 # ----------------------------------------------------------------------------
 # Historical Daily Prices
 
-# you will need an account and secret api_key
+# you will need a twelvedata account and an api_key. I stored in repo secrets
+api_key = os.environ.get("TWELVE_DATA_KEY")
+if not api_key:
+    raise ValueError("API key not found. Ensure TWELVE_DATA_KEY is set.")
 td = TDClient(apikey=api_key)
 
 # get the last 4 years of data
