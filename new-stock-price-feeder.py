@@ -1,34 +1,17 @@
+# new-stock-price-feeder.py
 # simulates a real-time stock feed
 # ----------------------------------------------------------------------------
+from twelvedata import TDClient
 import sys
 import pandas as pd
 import time, datetime, sys
 from dateutil.relativedelta import relativedelta
 import os, pathlib
 # ----------------------------------------------------------------------------
-# Connect to twelvedata API
-try:
-    import twelvedata
-except ModuleNotFoundError:
-    !pip install twelvedata[pandas,matplotlib,plotly,websocket-client]
-    import twelvedata
-
-# allow access to drive
-from google.colab import drive
-drive.mount('/content/drive', force_remount=True)
-
-# retrieve API key located in drive
-need_in_path = '/content/drive/MyDrive/Classes/CS119: Big Data/Quizzes/keys.py'
-if need_in_path not in sys.path:
-    sys.path.append(need_in_path)
-from keys import twelveDataKey as api_key
-
-# set up data collection client
-from twelvedata import TDClient
-td = TDClient(apikey=api_key)
-
-# ----------------------------------------------------------------------------
 # Historical Daily Prices
+
+# you will need an account and secret api_key
+td = TDClient(apikey=api_key)
 
 # get the last 4 years of data
 end_date = datetime.now().date()
